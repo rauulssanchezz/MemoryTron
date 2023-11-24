@@ -15,9 +15,11 @@ import kotlin.random.Random
 class Juego : AppCompatActivity() {
 
     lateinit var imgs: MutableList<Int>
-    lateinit var ultimg: ImageView
+    var ultimg: ImageView?=null
     var primerclick = false
     lateinit var imageViews: MutableList<ImageView>
+    var pulsado:MutableList<Boolean> = MutableList(12){false}
+    var posant:Int?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_juego)
@@ -77,19 +79,29 @@ class Juego : AppCompatActivity() {
     }
     fun primeraparte(pos: Int) {
         imageViews[pos].setImageResource(imgs[pos])
+        pulsado[pos]=true
     }
 
     fun segundaparte(pos: Int) {
+        var iguales=false
         if (primerclick) {
-            var iguales=comprobar(imageViews[pos], ultimg)
+             iguales=comprobar(imageViews[pos], ultimg!!)
             if (!iguales){
                 imageViews[pos].setImageResource(R.drawable.parteatras)
-                ultimg.setImageResource(R.drawable.parteatras)
+                ultimg!!.setImageResource(R.drawable.parteatras)
+                pulsado[pos]=false
+                pulsado[posant!!]=false
             }
         } else {
             primerclick = true
         }
-        ultimg = imageViews[pos]
+        if (iguales){
+            ultimg=null
+            primerclick=false
+        }else{
+            ultimg=imageViews[pos]
+            posant=pos
+        }
     }
 
     fun pulsado(view: View) {
@@ -97,77 +109,113 @@ class Juego : AppCompatActivity() {
 
         when (view.id) {
             R.id.ct1img1 -> {
+                var pos=0
+                if (!pulsado[pos]) {
+                    primeraparte(pos)
 
-                primeraparte(0)
 
-                view.postDelayed({ segundaparte(0) }, 500)
+                        view.postDelayed({ segundaparte(pos) }, 500)
+
+                }
             }
 
             R.id.ct1img2 -> {
+                var pos=1
+                if (!pulsado[pos]) {
+                    primeraparte(pos)
 
-                primeraparte(1)
-
-                view.postDelayed({ segundaparte(1) }, 500)
+                    view.postDelayed({ segundaparte(pos) }, 500)
+                }
             }
 
             R.id.ct1img3 -> {
-                primeraparte(2)
+                var pos=2
+                if (!pulsado[pos]) {
+                    primeraparte(pos)
 
-                view.postDelayed({ segundaparte(2) }, 500)
+                    view.postDelayed({ segundaparte(pos) }, 500)
+                }
             }
 
             R.id.ct1img4 -> {
-                primeraparte(3)
+                var pos=3
+                if (!pulsado[pos]) {
+                    primeraparte(pos)
 
-                view.postDelayed({ segundaparte(3) }, 500)
+                    view.postDelayed({ segundaparte(pos) }, 500)
+                }
             }
 
             R.id.ct2img1 -> {
-                primeraparte(4)
+                var pos=4
+                if (!pulsado[pos]) {
+                    primeraparte(pos)
 
-                view.postDelayed({ segundaparte(4) }, 500)
+                    view.postDelayed({ segundaparte(pos) }, 500)
+                }
             }
 
             R.id.ct2img2 -> {
-                primeraparte(5)
+                var pos=5
+                if (!pulsado[pos]) {
+                    primeraparte(pos)
 
-                view.postDelayed({ segundaparte(5) }, 500)
+                    view.postDelayed({ segundaparte(pos) }, 500)
+                }
             }
 
             R.id.ct2img3 -> {
-                primeraparte(6)
+                var pos=6
+                if (!pulsado[pos]) {
+                    primeraparte(pos)
 
-                view.postDelayed({ segundaparte(6) }, 500)
+                    view.postDelayed({ segundaparte(pos) }, 500)
+                }
             }
 
             R.id.ct2img4 -> {
-                primeraparte(7)
+                var pos=7
+                if (!pulsado[pos]) {
+                    primeraparte(pos)
 
-                view.postDelayed({ segundaparte(7) }, 500)
+                    view.postDelayed({ segundaparte(pos) }, 500)
+                }
             }
 
             R.id.ct3img1 -> {
-                primeraparte(8)
+                var pos=8
+                if (!pulsado[pos]) {
+                    primeraparte(pos)
 
-                view.postDelayed({ segundaparte(8) }, 500)
+                    view.postDelayed({ segundaparte(pos) }, 500)
+                }
             }
 
             R.id.ct3img2 -> {
-                primeraparte(9)
+                var pos=9
+                if (!pulsado[pos]) {
+                    primeraparte(pos)
 
-                view.postDelayed({ segundaparte(9) }, 500)
+                    view.postDelayed({ segundaparte(pos) }, 500)
+                }
             }
 
             R.id.ct3img3 -> {
-                primeraparte(10)
+                var pos=10
+                if (!pulsado[pos]) {
+                    primeraparte(pos)
 
-                view.postDelayed({ segundaparte(10) }, 500)
+                    view.postDelayed({ segundaparte(pos) }, 500)
+                }
             }
 
             R.id.ct3img4 -> {
-                primeraparte(11)
+                var pos=11
+                if (!pulsado[pos]) {
+                    primeraparte(pos)
 
-                view.postDelayed({ segundaparte(11) }, 500)
+                    view.postDelayed({ segundaparte(pos) }, 500)
+                }
             }
 
         }
