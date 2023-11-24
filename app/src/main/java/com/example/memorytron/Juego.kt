@@ -20,6 +20,7 @@ class Juego : AppCompatActivity() {
     lateinit var imageViews: MutableList<ImageView>
     var pulsado:MutableList<Boolean> = MutableList(12){false}
     var posant:Int?=null
+    var cont=0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_juego)
@@ -80,28 +81,36 @@ class Juego : AppCompatActivity() {
     fun primeraparte(pos: Int) {
         imageViews[pos].setImageResource(imgs[pos])
         pulsado[pos]=true
+        cont++
+        if(ultimg==null){
+            primerclick=false
+        }else{
+            primerclick=true
+        }
     }
 
     fun segundaparte(pos: Int) {
         var iguales=false
         if (primerclick) {
              iguales=comprobar(imageViews[pos], ultimg!!)
-            if (!iguales){
+            if (iguales){
+                ultimg=null
+                cont=0
+            }else if (cont==2){
                 imageViews[pos].setImageResource(R.drawable.parteatras)
                 ultimg!!.setImageResource(R.drawable.parteatras)
                 pulsado[pos]=false
                 pulsado[posant!!]=false
+                ultimg=null
+                posant=null
+                cont=0
             }
-        } else {
-            primerclick = true
-        }
-        if (iguales){
-            ultimg=null
-            primerclick=false
         }else{
             ultimg=imageViews[pos]
             posant=pos
         }
+
+
     }
 
     fun pulsado(view: View) {
@@ -114,7 +123,7 @@ class Juego : AppCompatActivity() {
                     primeraparte(pos)
 
 
-                        view.postDelayed({ segundaparte(pos) }, 500)
+                        view.postDelayed({ segundaparte(pos) }, 1)
 
                 }
             }
@@ -221,6 +230,10 @@ class Juego : AppCompatActivity() {
         }
 
 
+    }
+
+    fun reiniciar(view: View) {
+        recreate()
     }
 }
 
