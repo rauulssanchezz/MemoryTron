@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.core.graphics.drawable.toDrawable
+import kotlinx.coroutines.sync.Semaphore
 import kotlin.concurrent.timer
 import kotlin.random.Random
 
@@ -21,6 +22,7 @@ class Juego : AppCompatActivity() {
     var pulsado:MutableList<Boolean> = MutableList(12){false}
     var posant:Int?=null
     var cont=0
+    var semaforo= Semaphore(1)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_juego)
@@ -79,37 +81,39 @@ class Juego : AppCompatActivity() {
         return bitmap1.sameAs(bitmap2)
     }
     fun primeraparte(pos: Int) {
-        imageViews[pos].setImageResource(imgs[pos])
-        pulsado[pos]=true
-        cont++
-        if(ultimg==null){
-            primerclick=false
-        }else{
-            primerclick=true
-        }
+            imageViews[pos].setImageResource(imgs[pos])
+            pulsado[pos] = true
+            cont++
+            if (ultimg == null) {
+                primerclick = false
+            } else {
+                primerclick = true
+            }
+
     }
 
     fun segundaparte(pos: Int) {
-        var iguales=false
-        if (primerclick) {
-             iguales=comprobar(imageViews[pos], ultimg!!)
-            if (iguales){
-                ultimg=null
-                cont=0
-            }else if (cont==2){
-                imageViews[pos].setImageResource(R.drawable.parteatras)
-                ultimg!!.setImageResource(R.drawable.parteatras)
-                pulsado[pos]=false
-                pulsado[posant!!]=false
-                ultimg=null
-                posant=null
-                cont=0
-            }
-        }else{
-            ultimg=imageViews[pos]
-            posant=pos
-        }
 
+            var iguales = false
+            if (primerclick) {
+                iguales = comprobar(imageViews[pos], ultimg!!)
+                if (iguales) {
+                    ultimg = null
+                    cont = 0
+                } else if (cont == 2) {
+                    Thread.sleep(500)
+                    imageViews[pos].setImageResource(R.drawable.parteatras)
+                    ultimg!!.setImageResource(R.drawable.parteatras)
+                    pulsado[pos] = false
+                    pulsado[posant!!] = false
+                    ultimg = null
+                    posant = null
+                    cont = 0
+                }
+            } else {
+                ultimg = imageViews[pos]
+                posant = pos
+            }
 
     }
 
@@ -121,9 +125,7 @@ class Juego : AppCompatActivity() {
                 var pos=0
                 if (!pulsado[pos]) {
                     primeraparte(pos)
-
-
-                        view.postDelayed({ segundaparte(pos) }, 1)
+                    view.postDelayed({ segundaparte(pos) }, 0)
 
                 }
             }
@@ -133,7 +135,7 @@ class Juego : AppCompatActivity() {
                 if (!pulsado[pos]) {
                     primeraparte(pos)
 
-                    view.postDelayed({ segundaparte(pos) }, 500)
+                    view.postDelayed({ segundaparte(pos) }, 0)
                 }
             }
 
@@ -142,7 +144,7 @@ class Juego : AppCompatActivity() {
                 if (!pulsado[pos]) {
                     primeraparte(pos)
 
-                    view.postDelayed({ segundaparte(pos) }, 500)
+                    view.postDelayed({ segundaparte(pos) }, 0)
                 }
             }
 
@@ -151,7 +153,7 @@ class Juego : AppCompatActivity() {
                 if (!pulsado[pos]) {
                     primeraparte(pos)
 
-                    view.postDelayed({ segundaparte(pos) }, 500)
+                    view.postDelayed({ segundaparte(pos) }, 0)
                 }
             }
 
@@ -160,7 +162,7 @@ class Juego : AppCompatActivity() {
                 if (!pulsado[pos]) {
                     primeraparte(pos)
 
-                    view.postDelayed({ segundaparte(pos) }, 500)
+                    view.postDelayed({ segundaparte(pos) }, 0)
                 }
             }
 
@@ -169,7 +171,7 @@ class Juego : AppCompatActivity() {
                 if (!pulsado[pos]) {
                     primeraparte(pos)
 
-                    view.postDelayed({ segundaparte(pos) }, 500)
+                    view.postDelayed({ segundaparte(pos) }, 0)
                 }
             }
 
@@ -178,7 +180,7 @@ class Juego : AppCompatActivity() {
                 if (!pulsado[pos]) {
                     primeraparte(pos)
 
-                    view.postDelayed({ segundaparte(pos) }, 500)
+                    view.postDelayed({ segundaparte(pos) }, 0)
                 }
             }
 
@@ -187,7 +189,7 @@ class Juego : AppCompatActivity() {
                 if (!pulsado[pos]) {
                     primeraparte(pos)
 
-                    view.postDelayed({ segundaparte(pos) }, 500)
+                    view.postDelayed({ segundaparte(pos) }, 0)
                 }
             }
 
@@ -196,7 +198,7 @@ class Juego : AppCompatActivity() {
                 if (!pulsado[pos]) {
                     primeraparte(pos)
 
-                    view.postDelayed({ segundaparte(pos) }, 500)
+                    view.postDelayed({ segundaparte(pos) }, 0)
                 }
             }
 
@@ -205,7 +207,7 @@ class Juego : AppCompatActivity() {
                 if (!pulsado[pos]) {
                     primeraparte(pos)
 
-                    view.postDelayed({ segundaparte(pos) }, 500)
+                    view.postDelayed({ segundaparte(pos) }, 0)
                 }
             }
 
@@ -214,7 +216,7 @@ class Juego : AppCompatActivity() {
                 if (!pulsado[pos]) {
                     primeraparte(pos)
 
-                    view.postDelayed({ segundaparte(pos) }, 500)
+                    view.postDelayed({ segundaparte(pos) }, 0)
                 }
             }
 
@@ -223,7 +225,7 @@ class Juego : AppCompatActivity() {
                 if (!pulsado[pos]) {
                     primeraparte(pos)
 
-                    view.postDelayed({ segundaparte(pos) }, 500)
+                    view.postDelayed({ segundaparte(pos) }, 0)
                 }
             }
 
