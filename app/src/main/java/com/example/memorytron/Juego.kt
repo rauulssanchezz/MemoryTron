@@ -1,6 +1,7 @@
 package com.example.memorytron
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +24,7 @@ class Juego : AppCompatActivity() {
     var posant:Int?=null
     var cont=0
     var semaforo= Semaphore(1)
+    var gana=0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_juego)
@@ -100,6 +102,14 @@ class Juego : AppCompatActivity() {
                 if (iguales) {
                     ultimg = null
                     cont = 0
+                    gana++
+                    if(gana==6){
+                        Thread.sleep(250)
+                        var intent=Intent(this,Final::class.java)
+                        var resultado="Eres Admin"
+                        intent.putExtra("resultado",resultado)
+                        startActivity(intent)
+                    }
                 } else if (cont == 2) {
                     Thread.sleep(500)
                     imageViews[pos].setImageResource(R.drawable.parteatras)
