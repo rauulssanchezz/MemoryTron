@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -26,6 +27,8 @@ class Juego : AppCompatActivity() {
     var semaforo= Semaphore(1)
     var gana=0
     var vidas=4
+    var mediaPlayer:MediaPlayer?=null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_juego)
@@ -58,6 +61,7 @@ class Juego : AppCompatActivity() {
             findViewById<ImageView>(R.id.ct3img3),
             findViewById<ImageView>(R.id.ct3img4)
         )
+
     }
 
     fun comprobar(img1: ImageView, img2: ImageView): Boolean {
