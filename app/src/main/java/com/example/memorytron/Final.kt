@@ -22,7 +22,7 @@ class Final : AppCompatActivity() {
             texto.text="Eres Admin"
         }else{
             fondo.setBackgroundResource(R.drawable.perdiste)
-            texto.text="No Eres Admin"
+            texto.text="Cagaste"
         }
     }
 }

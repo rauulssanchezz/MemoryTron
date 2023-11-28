@@ -27,5 +27,6 @@
         android:layout_marginBottom="20dp"
         android:textSize="15sp"
         android:onClick="reiniciar"
+        android:textColor="@color/white"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,15 +6,55 @@
     android:layout_height="match_parent"
     tools:context=".Juego"
     android:background="@drawable/pared">
-    <TextView
+    <LinearLayout
         android:id="@+id/vidas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="Putas"
-        />
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/contenedor1"
+        android:layout_marginStart="10dp"
+        >
+        <ImageView
+            android:id="@+id/vida1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/vida"
+            android:adjustViewBounds="true"
+            />
+        <ImageView
+            android:id="@+id/vida2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/vida"
+            android:adjustViewBounds="true"
+            />
+        <ImageView
+            android:id="@+id/vida3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/vida"
+            android:adjustViewBounds="true"
+            />
+        <ImageView
+            android:id="@+id/vida4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/vida"
+            android:adjustViewBounds="true"
+            />
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            />
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/contenedor1"
         android:layout_width="match_parent"

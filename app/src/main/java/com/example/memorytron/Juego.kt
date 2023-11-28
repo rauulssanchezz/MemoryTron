@@ -25,6 +25,7 @@ class Juego : AppCompatActivity() {
     var cont=0
     var semaforo= Semaphore(1)
     var gana=0
+    var vidas=4
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_juego)
@@ -57,8 +58,6 @@ class Juego : AppCompatActivity() {
             findViewById<ImageView>(R.id.ct3img3),
             findViewById<ImageView>(R.id.ct3img4)
         )
-
-
     }
 
     fun comprobar(img1: ImageView, img2: ImageView): Boolean {
@@ -95,7 +94,6 @@ class Juego : AppCompatActivity() {
     }
 
     fun segundaparte(pos: Int) {
-
             var iguales = false
             if (primerclick) {
                 iguales = comprobar(imageViews[pos], ultimg!!)
@@ -105,8 +103,8 @@ class Juego : AppCompatActivity() {
                     gana++
                     if(gana==6){
                         Thread.sleep(250)
-                        var intent=Intent(this,Final::class.java)
                         var resultado="Eres Admin"
+                        var intent=Intent(this,Final::class.java)
                         intent.putExtra("resultado",resultado)
                         startActivity(intent)
                     }
@@ -119,6 +117,25 @@ class Juego : AppCompatActivity() {
                     ultimg = null
                     posant = null
                     cont = 0
+                    vidas--
+                    if (vidas==3){
+                        var imagen=findViewById<ImageView>(R.id.vida4)
+                        imagen.setImageResource(R.drawable.roto)
+                    }else if(vidas==2){
+                        var imagen=findViewById<ImageView>(R.id.vida3)
+                        imagen.setImageResource(R.drawable.roto)
+                    }else if(vidas==1){
+                        var imagen=findViewById<ImageView>(R.id.vida2)
+                        imagen.setImageResource(R.drawable.roto)
+                    }else if(vidas==0){
+                        var imagen=findViewById<ImageView>(R.id.vida1)
+                        imagen.setImageResource(R.drawable.roto)
+                        Thread.sleep(300)
+                        var resultado="Cagaste"
+                        var intent=Intent(this,Final::class.java)
+                        intent.putExtra("resultado",resultado)
+                        startActivity(intent)
+                    }
                 }
             } else {
                 ultimg = imageViews[pos]
