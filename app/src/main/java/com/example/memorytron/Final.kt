@@ -20,15 +20,17 @@ class Final : AppCompatActivity() {
         var texto=findViewById<TextView>(R.id.texto)
 
         var nombrePaquete = getApplicationContext().getPackageName()
-        mediaPlayer= MediaPlayer.create(this,R.raw.ganador)
         if (resultado.equals("Eres Admin")){
             fondo.setBackgroundResource(R.drawable.admin)
             texto.text="Eres Admin"
+            mediaPlayer= MediaPlayer.create(this,R.raw.ganador)
             mediaPlayer?.start()
 
         }else{
             fondo.setBackgroundResource(R.drawable.perdiste)
             texto.text="Cagaste"
+            mediaPlayer= MediaPlayer.create(this,R.raw.perdiste)
+            mediaPlayer?.start()
         }
     }
 }
