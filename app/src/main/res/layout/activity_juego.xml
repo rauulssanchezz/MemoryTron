@@ -220,11 +220,11 @@
     </LinearLayout>
 
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/reiniciar"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/marron"
         android:text="REINICIAR"
         android:textColor="@color/white"
         android:textSize="17sp"

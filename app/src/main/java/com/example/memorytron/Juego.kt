@@ -64,6 +64,7 @@ class Juego : AppCompatActivity() {
 
         mediaPlayer= MediaPlayer.create(this,R.raw.suspense)
         mediaPlayer?.start()
+
     }
 
     fun comprobar(img1: ImageView, img2: ImageView): Boolean {

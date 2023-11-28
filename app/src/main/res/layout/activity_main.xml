@@ -7,17 +7,6 @@
     tools:context=".MainActivity"
     android:background="@drawable/castillo">
 
-    <TextView
-        android:id="@+id/texto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pulsa para Jugar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="20sp"
-        android:layout_marginTop="15dp"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/jugar"/>
 
     <Button
         android:id="@+id/jugar"
@@ -27,11 +16,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:text="JUGAR"
-        android:backgroundTint="@color/black"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:onClick="jugar"
         android:layout_marginBottom="50dp"
+        android:backgroundTint="@color/trasparente"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
