@@ -112,6 +112,7 @@ class Juego : AppCompatActivity() {
                         Thread.sleep(250)
                         var resultado="Eres Admin"
                         var intent=Intent(this,Final::class.java)
+                        mediaPlayer?.stop()
                         intent.putExtra("resultado",resultado)
                         startActivity(intent)
                     }
@@ -140,6 +141,7 @@ class Juego : AppCompatActivity() {
                         Thread.sleep(300)
                         var resultado="Cagaste"
                         var intent=Intent(this,Final::class.java)
+                        mediaPlayer?.stop()
                         intent.putExtra("resultado",resultado)
                         startActivity(intent)
                     }

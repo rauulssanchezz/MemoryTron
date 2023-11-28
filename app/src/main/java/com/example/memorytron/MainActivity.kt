@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     fun jugar(view: View) {
         val intent=Intent(this,Juego::class.java)
-
+        mediaPlayer?.stop()
         startActivity(intent)
 
     }
