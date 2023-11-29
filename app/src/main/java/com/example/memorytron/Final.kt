@@ -42,7 +42,7 @@ class Final : AppCompatActivity() {
         Thread.sleep(200)
         resultados.visibility=View.VISIBLE
         if (resultado.equals("Eres Admin")){
-            fondo.setBackgroundResource(R.drawable.admin)
+            fondo.setBackgroundResource(R.drawable.victoria)
             texto.setImageResource(R.drawable.admin)
             mediaPlayer= MediaPlayer.create(this,R.raw.ganador)
             mediaPlayer?.start()
@@ -53,7 +53,7 @@ class Final : AppCompatActivity() {
             resultados.text="Victorias Totales: $victorias\nDerrotas Totales: $derrotas"
         }else{
             fondo.setBackgroundResource(R.drawable.perdiste)
-            texto.setImageResource(R.drawable.cagaste)
+            //texto.setImageResource(R.drawable.cagaste)
             mediaPlayer= MediaPlayer.create(this,R.raw.perdiste)
             mediaPlayer?.setVolume(0.1F,0.1F)
             mediaPlayer?.start()
