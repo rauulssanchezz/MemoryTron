@@ -63,7 +63,7 @@ class Juego : AppCompatActivity() {
         )
 
         mediaPlayer= MediaPlayer.create(this,R.raw.suspense)
-        mediaPlayer?.setVolume(50.0F,50.0F)
+        mediaPlayer?.setVolume(0.5F,0.5F)
         mediaPlayer?.start()
 
 
@@ -284,7 +284,7 @@ class Juego : AppCompatActivity() {
         super.onBackPressed()
     }
     override fun onStop() {
-        mediaPlayer?.stop()
+        mediaPlayer?.pause()
         super.onStop()
     }
     override fun onStart() {
@@ -294,9 +294,11 @@ class Juego : AppCompatActivity() {
 
     fun pararMusica(view: View) {
         if (musica) {
-            mediaPlayer?.stop()
+            mediaPlayer?.pause()
+            musica=false
         }else{
             mediaPlayer?.start()
+            musica=true
         }
     }
 }

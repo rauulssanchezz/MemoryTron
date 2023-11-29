@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mediaPlayer= MediaPlayer.create(this,R.raw.inicio)
-        mediaPlayer?.setVolume(50.0F,50.0F)
+        mediaPlayer?.setVolume(0.5F,0.5F)
         mediaPlayer?.start()
     }
 
@@ -24,13 +24,13 @@ class MainActivity : AppCompatActivity() {
         mediaPlayer=MediaPlayer.create(this,R.raw.boton)
         mediaPlayer?.seekTo(900)
         mediaPlayer?.start()
-        mediaPlayer?.setVolume(100.0F,100.0F)
+        mediaPlayer?.setVolume(1.0F,1.0F)
         Thread.sleep(250)
         startActivity(intent)
     }
 
     override fun onStop() {
-        mediaPlayer?.stop()
+        mediaPlayer?.pause()
         super.onStop()
     }
 
@@ -41,9 +41,11 @@ class MainActivity : AppCompatActivity() {
 
     fun pararMusica(view: View) {
         if (musica) {
-            mediaPlayer?.stop()
+            mediaPlayer?.pause()
+            musica=false
         }else{
             mediaPlayer?.start()
+            musica=true
         }
     }
 }

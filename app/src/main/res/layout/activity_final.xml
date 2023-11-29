@@ -14,16 +14,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:onClick="pararMusica"/>
-<TextView
+<ImageView
     android:id="@+id/texto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textSize="30sp"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     android:layout_marginTop="20dp"
-    android:textColor="@color/black"
     />
     <TextView
         android:id="@+id/info"
@@ -34,7 +32,6 @@
         app:layout_constraintTop_toBottomOf="@+id/texto"
         android:layout_marginTop="200dp"
         android:background="@color/gris"
-        android:text="Victorias Totales: \nDerrotas Totales: "
         android:textColor="@color/white"
         android:padding="30dp"
         android:gravity="start"
