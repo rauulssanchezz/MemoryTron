@@ -25,9 +25,6 @@ class Final : AppCompatActivity() {
         setContentView(R.layout.activity_final)
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-
-
-
         victorias=getString(R.string.victorias).toInt()
         derrotas=getString(R.string.derrotas).toInt()
 
@@ -37,7 +34,6 @@ class Final : AppCompatActivity() {
 
         var texto=findViewById<ImageView>(R.id.texto)
 
-        var nombrePaquete = getApplicationContext().getPackageName()
         var resultados=findViewById<TextView>(R.id.info)
         Thread.sleep(200)
         resultados.visibility=View.VISIBLE
@@ -53,7 +49,7 @@ class Final : AppCompatActivity() {
             resultados.text="Victorias Totales: $victorias\nDerrotas Totales: $derrotas"
         }else{
             fondo.setBackgroundResource(R.drawable.perdiste)
-            //texto.setImageResource(R.drawable.cagaste)
+            texto.setImageResource(R.drawable.cagaste)
             mediaPlayer= MediaPlayer.create(this,R.raw.perdiste)
             mediaPlayer?.setVolume(0.1F,0.1F)
             mediaPlayer?.start()
