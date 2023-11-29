@@ -286,6 +286,10 @@ class Juego : AppCompatActivity() {
         mediaPlayer?.stop()
         super.onStop()
     }
+    override fun onStart() {
+        mediaPlayer?.start()
+        super.onStart()
+    }
 }
 
 
