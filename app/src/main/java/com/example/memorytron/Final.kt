@@ -11,6 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 class Final : AppCompatActivity() {
 
     var mediaPlayer:MediaPlayer?=null
+    var musica=true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_final)
@@ -26,12 +27,14 @@ class Final : AppCompatActivity() {
             fondo.setBackgroundResource(R.drawable.admin)
             texto.text="Eres Admin"
             mediaPlayer= MediaPlayer.create(this,R.raw.ganador)
+            mediaPlayer?.setVolume(50.0F,50.0F)
             mediaPlayer?.start()
 
         }else{
             fondo.setBackgroundResource(R.drawable.perdiste)
             texto.text="Cagaste"
             mediaPlayer= MediaPlayer.create(this,R.raw.perdiste)
+            mediaPlayer?.setVolume(50.0F,50.0F)
             mediaPlayer?.start()
         }
         var resultados=findViewById<TextView>(R.id.info)
@@ -60,7 +63,11 @@ class Final : AppCompatActivity() {
     }
 
     fun pararMusica(view: View) {
-        mediaPlayer?.stop()
+        if (musica) {
+            mediaPlayer?.stop()
+        }else{
+            mediaPlayer?.start()
+        }
     }
 
 }

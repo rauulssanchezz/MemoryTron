@@ -16,7 +16,7 @@ import kotlin.concurrent.timer
 import kotlin.random.Random
 
 class Juego : AppCompatActivity() {
-
+    var musica=true
     lateinit var imgs: MutableList<Int>
     var ultimg: ImageView?=null
     var primerclick = false
@@ -63,6 +63,7 @@ class Juego : AppCompatActivity() {
         )
 
         mediaPlayer= MediaPlayer.create(this,R.raw.suspense)
+        mediaPlayer?.setVolume(50.0F,50.0F)
         mediaPlayer?.start()
 
 
@@ -292,7 +293,11 @@ class Juego : AppCompatActivity() {
     }
 
     fun pararMusica(view: View) {
-        mediaPlayer?.stop()
+        if (musica) {
+            mediaPlayer?.stop()
+        }else{
+            mediaPlayer?.start()
+        }
     }
 }
 
