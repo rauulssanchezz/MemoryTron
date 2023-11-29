@@ -35,7 +35,7 @@ class Final : AppCompatActivity() {
         var texto=findViewById<ImageView>(R.id.texto)
 
         var resultados=findViewById<TextView>(R.id.info)
-        Thread.sleep(200)
+
         resultados.visibility=View.VISIBLE
         if (resultado.equals("Eres Admin")){
             fondo.setBackgroundResource(R.drawable.victoria)
@@ -43,9 +43,8 @@ class Final : AppCompatActivity() {
             mediaPlayer= MediaPlayer.create(this,R.raw.ganador)
             mediaPlayer?.start()
             victorias++
-            sharedPreferences.edit {
-                putString(getString(R.string.victorias),victorias.toString())
-            }
+            sharedPreferences.edit().putString(getString(R.string.victorias),victorias.toString())
+            sharedPreferences.edit().apply()
             resultados.text="Victorias Totales: $victorias\nDerrotas Totales: $derrotas"
         }else{
             fondo.setBackgroundResource(R.drawable.perdiste)
@@ -54,9 +53,8 @@ class Final : AppCompatActivity() {
             mediaPlayer?.setVolume(0.1F,0.1F)
             mediaPlayer?.start()
             derrotas++
-            sharedPreferences.edit {
-                putString(getString(R.string.derrotas),derrotas.toString())
-            }
+            sharedPreferences.edit().putString(getString(R.string.derrotas),derrotas.toString())
+            sharedPreferences.edit().apply()
             resultados.text="Victorias Totales: $victorias\nDerrotas Totales: $derrotas"
         }
 
