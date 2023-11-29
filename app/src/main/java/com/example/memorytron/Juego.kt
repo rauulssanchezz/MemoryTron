@@ -65,6 +65,7 @@ class Juego : AppCompatActivity() {
         mediaPlayer= MediaPlayer.create(this,R.raw.suspense)
         mediaPlayer?.start()
 
+
     }
 
     fun comprobar(img1: ImageView, img2: ImageView): Boolean {
@@ -271,7 +272,15 @@ class Juego : AppCompatActivity() {
     }
 
     fun reiniciar(view: View) {
+        mediaPlayer?.stop()
         recreate()
+    }
+
+    override fun onBackPressed() {
+        mediaPlayer?.stop()
+        var intent=Intent(this,MainActivity::class.java)
+        startActivity(intent)
+        super.onBackPressed()
     }
 }
 

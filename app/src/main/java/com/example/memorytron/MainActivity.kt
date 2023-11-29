@@ -20,6 +20,5 @@ class MainActivity : AppCompatActivity() {
         val intent=Intent(this,Juego::class.java)
         mediaPlayer?.stop()
         startActivity(intent)
-
     }
 }

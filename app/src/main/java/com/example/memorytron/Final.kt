@@ -1,8 +1,10 @@
 package com.example.memorytron
 
+import android.content.Intent
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 
@@ -33,4 +35,17 @@ class Final : AppCompatActivity() {
             mediaPlayer?.start()
         }
     }
+    override fun onBackPressed() {
+        mediaPlayer?.stop()
+        var intent=Intent(this,Juego::class.java)
+        startActivity(intent)
+        super.onBackPressed()
+    }
+
+    fun reiniciar(view: View) {
+        var intent=Intent(this,Juego::class.java)
+        mediaPlayer?.stop()
+        startActivity(intent)
+    }
+
 }
