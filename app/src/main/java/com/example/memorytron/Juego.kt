@@ -282,6 +282,10 @@ class Juego : AppCompatActivity() {
         startActivity(intent)
         super.onBackPressed()
     }
+    override fun onStop() {
+        mediaPlayer?.stop()
+        super.onStop()
+    }
 }
 
 

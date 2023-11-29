@@ -34,6 +34,9 @@ class Final : AppCompatActivity() {
             mediaPlayer= MediaPlayer.create(this,R.raw.perdiste)
             mediaPlayer?.start()
         }
+        var resultados=findViewById<TextView>(R.id.info)
+        Thread.sleep(200)
+        resultados.visibility=View.VISIBLE
     }
     override fun onBackPressed() {
         mediaPlayer?.stop()
@@ -46,6 +49,10 @@ class Final : AppCompatActivity() {
         var intent=Intent(this,Juego::class.java)
         mediaPlayer?.stop()
         startActivity(intent)
+    }
+    override fun onStop() {
+        mediaPlayer?.stop()
+        super.onStop()
     }
 
 }

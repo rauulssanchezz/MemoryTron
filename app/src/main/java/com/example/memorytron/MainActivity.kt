@@ -21,4 +21,9 @@ class MainActivity : AppCompatActivity() {
         mediaPlayer?.stop()
         startActivity(intent)
     }
+
+    override fun onStop() {
+        mediaPlayer?.stop()
+        super.onStop()
+    }
 }

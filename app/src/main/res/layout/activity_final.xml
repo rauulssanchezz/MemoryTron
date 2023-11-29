@@ -15,8 +15,25 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     android:layout_marginTop="20dp"
+    android:textColor="@color/black"
     />
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/reiniciar"
+        app:layout_constraintTop_toBottomOf="@+id/texto"
+        android:layout_marginTop="200dp"
+        android:background="@color/gris"
+        android:text="Victorias Totales: \nDerrotas Totales: "
+        android:textColor="@color/white"
+        android:padding="30dp"
+        android:gravity="start"
+        android:visibility="invisible"
+       />
     <Button
+        android:id="@+id/reiniciar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/marron"
@@ -29,4 +46,5 @@
         android:onClick="reiniciar"
         android:textColor="@color/white"
         />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
