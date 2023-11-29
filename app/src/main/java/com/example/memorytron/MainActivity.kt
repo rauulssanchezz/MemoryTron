@@ -36,4 +36,8 @@ class MainActivity : AppCompatActivity() {
         mediaPlayer?.start()
         super.onStart()
     }
+
+    fun pararMusica(view: View) {
+        mediaPlayer?.stop()
+    }
 }

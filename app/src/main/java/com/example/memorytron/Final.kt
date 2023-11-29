@@ -59,4 +59,8 @@ class Final : AppCompatActivity() {
         super.onStart()
     }
 
+    fun pararMusica(view: View) {
+        mediaPlayer?.stop()
+    }
+
 }
