@@ -61,7 +61,8 @@ class Final : AppCompatActivity() {
         }
         resultados.text = "Victorias Totales: $victorias\nDerrotas Totales: $derrotas"
 
-        musica=intent.getBooleanExtra("musica",musica)
+        sharedPreferences=PreferenceManager.getDefaultSharedPreferences(this)
+        musica=sharedPreferences.getBoolean("musica",true)
 
         if(!musica) {
             mediaPlayer?.stop()
