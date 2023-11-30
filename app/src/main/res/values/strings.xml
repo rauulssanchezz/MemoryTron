@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">MemoryTron</string>
-    <string name="victorias">0</string>
+    <string name="victorias">0.0</string>
     <string name="derrotas">0</string>
 </resources>

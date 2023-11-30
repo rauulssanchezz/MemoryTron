@@ -62,7 +62,7 @@ class Juego : AppCompatActivity() {
             findViewById<ImageView>(R.id.ct3img4)
         )
 
-        mediaPlayer= MediaPlayer.create(this,R.raw.suspense)
+        mediaPlayer= MediaPlayer.create(this,R.raw.juego)
         mediaPlayer?.setVolume(0.5F,0.5F)
         mediaPlayer?.start()
 
