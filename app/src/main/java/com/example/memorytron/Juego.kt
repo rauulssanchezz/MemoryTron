@@ -28,7 +28,6 @@ class Juego : AppCompatActivity() {
     var gana=0
     var vidas=4
     var mediaPlayer:MediaPlayer?=null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_juego)
