@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.Switch
 import androidx.core.graphics.drawable.toDrawable
 import kotlinx.coroutines.sync.Semaphore
 import kotlin.concurrent.timer
@@ -61,9 +62,13 @@ class Juego : AppCompatActivity() {
             findViewById<ImageView>(R.id.ct3img4)
         )
 
+        musica=intent.getBooleanExtra("musica",musica)
         mediaPlayer= MediaPlayer.create(this,R.raw.juego)
         mediaPlayer?.setVolume(0.5F,0.5F)
         mediaPlayer?.start()
+        if (!musica){
+            mediaPlayer?.stop()
+        }
 
 
     }
@@ -112,10 +117,7 @@ class Juego : AppCompatActivity() {
                     if(gana==6){
                         Thread.sleep(250)
                         var resultado="Eres Admin"
-                        var intent=Intent(this,Final::class.java)
-                        mediaPlayer?.stop()
-                        intent.putExtra("resultado",resultado)
-                        startActivity(intent)
+                        newActivity(resultado)
                     }
                 } else if (cont == 2) {
                     Thread.sleep(500)
@@ -141,10 +143,7 @@ class Juego : AppCompatActivity() {
                         imagen.setImageResource(R.drawable.roto)
                         Thread.sleep(300)
                         var resultado="Cagaste"
-                        var intent=Intent(this,Final::class.java)
-                        mediaPlayer?.stop()
-                        intent.putExtra("resultado",resultado)
-                        startActivity(intent)
+                        newActivity(resultado)
                     }
                 }
             } else {
@@ -291,14 +290,13 @@ class Juego : AppCompatActivity() {
         super.onStart()
     }
 
-    fun pararMusica(view: View) {
-        if (musica) {
-            mediaPlayer?.pause()
-            musica=false
-        }else{
-            mediaPlayer?.start()
-            musica=true
-        }
+
+    fun newActivity(res:String){
+        var intent=Intent(this,Final::class.java)
+        intent.putExtra("resultado",res)
+        intent.putExtra("musica",musica)
+        mediaPlayer?.stop()
+        startActivity(intent)
     }
 }
 

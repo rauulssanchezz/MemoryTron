@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.view.View
 import android.widget.ImageView
+import android.widget.Switch
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.edit
@@ -22,8 +23,8 @@ class Final : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_final)
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         // Recupera las victorias y derrotas almacenadas en SharedPreferences
         var victorias = sharedPreferences.getString(getString(R.string.victorias), "0")?.toInt() ?: 0
         var derrotas = sharedPreferences.getString(getString(R.string.derrotas), "0")?.toInt() ?: 0
@@ -58,6 +59,11 @@ class Final : AppCompatActivity() {
         }
         resultados.text = "Victorias Totales: $victorias\nDerrotas Totales: $derrotas"
 
+        musica=intent.getBooleanExtra("musica",musica)
+
+        if(!musica) {
+            mediaPlayer?.stop()
+        }
 
 
     }
@@ -83,14 +89,5 @@ class Final : AppCompatActivity() {
         super.onResume()
     }
 
-    fun pararMusica(view: View) {
-        if (musica) {
-            mediaPlayer?.pause()
-            musica=false
-        }else{
-            mediaPlayer?.start()
-            musica=true
-        }
-    }
 
 }

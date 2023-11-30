@@ -14,12 +14,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mediaPlayer= MediaPlayer.create(this,R.raw.inicio)
-        mediaPlayer?.setVolume(0.5F,0.5F)
+        mediaPlayer?.setVolume(0.3F,0.3F)
         mediaPlayer?.start()
     }
 
     fun jugar(view: View) {
         val intent=Intent(this,Juego::class.java)
+        intent.putExtra("musica",musica)
         mediaPlayer?.stop()
         mediaPlayer=MediaPlayer.create(this,R.raw.boton)
         mediaPlayer?.seekTo(900)
