@@ -144,7 +144,9 @@ class Juego : AppCompatActivity() {
                 newActivity(resultado)
             }
         } else if (cont == 2) {
-            Thread.sleep(500)
+            Thread.sleep(400)
+            animacion(imageViews[pos],100,150)
+            animacion(imageViews[posant!!],100,150)
             imageViews[pos].setImageResource(R.drawable.parteatras)
             ultimg!!.setImageResource(R.drawable.parteatras)
             pulsado[pos] = false
@@ -249,17 +251,19 @@ class Juego : AppCompatActivity() {
 
     //funcion que ejecuta la animación de las cartas y ejecuta la primera y segunda
     fun accion(pos: Int, view: View) {
-        animacion(imageViews[pos],150,100)
-        if (!pulsado[pos]) {
-            Thread{
-                semaforo.acquire()
-                primeraparte(pos)
-                handler.post {
-                    semaforo.release()
-                    segundaparte(pos)
-                }
-            }.start()
-        }
+        animacion(imageViews[pos],100,150)
+        view.postDelayed({
+            if (!pulsado[pos]) {
+                Thread{
+                    semaforo.acquire()
+                    primeraparte(pos)
+                    handler.post {
+                        semaforo.release()
+                        segundaparte(pos)
+                    }
+                }.start()
+            }
+        },270)
     }
 
     // funcion para pasar al resultado final
