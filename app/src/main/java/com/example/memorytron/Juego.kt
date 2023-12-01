@@ -102,13 +102,15 @@ class Juego : AppCompatActivity() {
 
     fun primeraparte(pos: Int) {
         // Configura la primera parte del juego al hacer clic en una imagen
-        imageViews[pos].setImageResource(imgs[pos])
-        pulsado[pos] = true
-        cont++
-        if (ultimg == null) {
-            primerclick = false
-        } else {
-            primerclick = true
+        if(cont<2) {
+            imageViews[pos].setImageResource(imgs[pos])
+            pulsado[pos] = true
+            cont++
+            if (ultimg == null) {
+                primerclick = false
+            } else {
+                primerclick = true
+            }
         }
     }
 
