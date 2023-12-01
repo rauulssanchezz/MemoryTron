@@ -6,6 +6,8 @@ import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.preference.PreferenceManager
 import android.view.View
 import android.widget.ImageView
@@ -27,6 +29,7 @@ class Juego : AppCompatActivity() {
     var vidas = 4
     var mediaPlayer: MediaPlayer? = null
     lateinit var sharedPreferences: SharedPreferences
+    lateinit var  handler :Handler
 
     // Utiliza CountDownLatch para la sincronización
     private val latch = CountDownLatch(1)
@@ -34,6 +37,8 @@ class Juego : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_juego)
+
+        handler= Handler(Looper.getMainLooper())
 
         imgs = mutableListOf(
             R.drawable.pinguino,
@@ -99,10 +104,9 @@ class Juego : AppCompatActivity() {
         drawable2.draw(canvas2)
         return bitmap1.sameAs(bitmap2)
     }
-
     fun primeraparte(pos: Int) {
         // Configura la primera parte del juego al hacer clic en una imagen
-        if(cont<2) {
+        if (cont<2) {
             imageViews[pos].setImageResource(imgs[pos])
             pulsado[pos] = true
             cont++
@@ -116,63 +120,55 @@ class Juego : AppCompatActivity() {
 
     //La segunda parte donde se compara si las imagenes son iguales o no teniendo en cuenta si es la primera foto que se pulsa o no
     fun segundaparte(pos: Int) {
-        if (primerclick) {
-            Thread(Runnable {
-                val iguales = comprobar(imageViews[pos], ultimg!!)
-                runOnUiThread {
-                    procesarResultado(pos, iguales)
-                }
-            }).start()
+        semaforo.acquire()
+        if (primerclick && cont==2) {
+            val iguales = comprobar(imageViews[pos], ultimg!!)
+            procesarResultado(pos, iguales)
         } else {
             ultimg = imageViews[pos]
             posant = pos
         }
+        semaforo.release()
     }
-
 
     //funcion que compara  que dependiendo si las imagenes son iguales o no responde lo que toque
     private fun procesarResultado(pos: Int, iguales: Boolean) {
-        try {
-            semaforo.acquire()
 
-            if (iguales) {
-                ultimg = null
-                cont = 0
-                gana++
-                if (gana == 6) {
-                    Thread.sleep(250)
-                    var resultado = "Eres Admin"
-                    newActivity(resultado)
-                }
-            } else if (cont == 2) {
-                Thread.sleep(500)
-                imageViews[pos].setImageResource(R.drawable.parteatras)
-                ultimg!!.setImageResource(R.drawable.parteatras)
-                pulsado[pos] = false
-                pulsado[posant!!] = false
-                ultimg = null
-                posant = null
-                cont = 0
-                vidas--
-                if (vidas == 3) {
-                    var imagen = findViewById<ImageView>(R.id.vida4)
-                    imagen.setImageResource(R.drawable.roto)
-                } else if (vidas == 2) {
-                    var imagen = findViewById<ImageView>(R.id.vida3)
-                    imagen.setImageResource(R.drawable.roto)
-                } else if (vidas == 1) {
-                    var imagen = findViewById<ImageView>(R.id.vida2)
-                    imagen.setImageResource(R.drawable.roto)
-                } else if (vidas == 0) {
-                    var imagen = findViewById<ImageView>(R.id.vida1)
-                    imagen.setImageResource(R.drawable.roto)
-                    Thread.sleep(300)
-                    var resultado = "Cagaste"
-                    newActivity(resultado)
-                }
+        if (iguales) {
+            ultimg = null
+            cont = 0
+            gana++
+            if (gana == 6) {
+                Thread.sleep(250)
+                var resultado = "Eres Admin"
+                newActivity(resultado)
             }
-        } finally {
-            semaforo.release()
+        } else if (cont == 2) {
+            Thread.sleep(500)
+            imageViews[pos].setImageResource(R.drawable.parteatras)
+            ultimg!!.setImageResource(R.drawable.parteatras)
+            pulsado[pos] = false
+            pulsado[posant!!] = false
+            ultimg = null
+            posant = null
+            cont = 0
+            vidas--
+            if (vidas == 3) {
+                var imagen = findViewById<ImageView>(R.id.vida4)
+                imagen.setImageResource(R.drawable.roto)
+            } else if (vidas == 2) {
+                var imagen = findViewById<ImageView>(R.id.vida3)
+                imagen.setImageResource(R.drawable.roto)
+            } else if (vidas == 1) {
+                var imagen = findViewById<ImageView>(R.id.vida2)
+                imagen.setImageResource(R.drawable.roto)
+            } else if (vidas == 0) {
+                var imagen = findViewById<ImageView>(R.id.vida1)
+                imagen.setImageResource(R.drawable.roto)
+                Thread.sleep(300)
+                var resultado = "Cagaste"
+                newActivity(resultado)
+            }
         }
     }
 
@@ -275,8 +271,14 @@ class Juego : AppCompatActivity() {
     fun accion(pos: Int, view: View) {
         if (!pulsado[pos]) {
             animacion(imageViews[pos],150,100)
-            primeraparte(pos)
-            view.postDelayed({ segundaparte(pos) }, 0)
+            Thread{
+                semaforo.acquire()
+                primeraparte(pos)
+                handler.post {
+                    semaforo.release()
+                    segundaparte(pos)
+                }
+            }.start()
         }
     }
 
