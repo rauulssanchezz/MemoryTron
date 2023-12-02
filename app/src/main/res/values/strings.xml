@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">MemoryTron</string>
-    <integer name="victorias">0</integer>
-    <integer name="derrotas">0</integer>
+    <integer name="victoriasN">0</integer>
+    <integer name="derrotasN">0</integer>
+    <integer name="victoriasD">0</integer>
+    <integer name="derrotasD">0</integer>
     <bool name="musica">true</bool>
 </resources>

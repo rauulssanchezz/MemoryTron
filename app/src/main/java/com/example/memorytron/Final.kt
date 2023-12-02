@@ -18,7 +18,7 @@ class Final : AppCompatActivity() {
 
     var mediaPlayer: MediaPlayer? = null
     var musica = true
-
+    var modo=""
     private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,10 +28,18 @@ class Final : AppCompatActivity() {
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         // Recupera las victorias y derrotas almacenadas en SharedPreferences
-        var victorias = sharedPreferences.getInt("victorias", 0)
-        var derrotas = sharedPreferences.getInt("derrotas", 0)
+         var victoriasN=sharedPreferences.getInt("victoriasN", 0)
+         var derrotasN=sharedPreferences.getInt("derrotasN", 0)
+
+        var victoriasD=sharedPreferences.getInt("victoriasD", 0)
+        var derrotasD=sharedPreferences.getInt("derrotasD", 0)
+
+
+        var victorias =0
+        var derrotas =0
 
         var resultado = intent.getStringExtra("resultado").toString()
+        modo=intent.getStringExtra("modo").toString()
 
         var fondo = findViewById<ConstraintLayout>(R.id.background)
         var texto = findViewById<ImageView>(R.id.texto)
@@ -40,24 +48,52 @@ class Final : AppCompatActivity() {
         resultados.visibility = View.VISIBLE
 
         if (resultado.equals("Eres Admin")) {
-            fondo.setBackgroundResource(R.drawable.victoria)
-            texto.setImageResource(R.drawable.admin)
-            mediaPlayer = MediaPlayer.create(this, R.raw.ganador)
+            if (modo.equals("normal")) {
+                fondo.setBackgroundResource(R.drawable.victoria)
+                texto.setImageResource(R.drawable.admin)
+                mediaPlayer = MediaPlayer.create(this, R.raw.ganador)
+                victoriasN++
+            }else{
+                fondo.setBackgroundResource(R.drawable.victoria2)
+                texto.setImageResource(R.drawable.admin)
+                mediaPlayer = MediaPlayer.create(this, R.raw.ganador2)
+                victoriasD++
+            }
             mediaPlayer?.start()
-            victorias++
+            mediaPlayer?.isLooping=true
         } else {
-            fondo.setBackgroundResource(R.drawable.perdiste)
-            texto.setImageResource(R.drawable.cagaste)
-            mediaPlayer = MediaPlayer.create(this, R.raw.derrota)
+            if (modo.equals("normal")){
+                fondo.setBackgroundResource(R.drawable.perdiste)
+                texto.setImageResource(R.drawable.cagaste)
+                mediaPlayer = MediaPlayer.create(this, R.raw.derrota)
+                derrotasN++
+            }else{
+                fondo.setBackgroundResource(R.drawable.perdiste2)
+                texto.setImageResource(R.drawable.cagaste)
+                mediaPlayer = MediaPlayer.create(this, R.raw.derrota2)
+                derrotasD++
+            }
             mediaPlayer?.seekTo(5000)
             mediaPlayer?.setVolume(1.0F,1.0F)
             mediaPlayer?.start()
-            derrotas++
+            mediaPlayer?.isLooping=true
         }
-        with(sharedPreferences.edit()) {
-            putInt("victorias", victorias)
-            putInt("derrotas", derrotas)
-            apply()
+        if (modo.equals("normal")) {
+            with(sharedPreferences.edit()) {
+                putInt("victoriasN", victoriasN)
+                putInt("derrotasN", derrotasN)
+                apply()
+            }
+            victorias=victoriasN
+            derrotas=derrotasN
+        }else{
+            with(sharedPreferences.edit()) {
+                putInt("victoriasD", victoriasD)
+                putInt("derrotasD", derrotasD)
+                apply()
+            }
+            victorias=victoriasD
+            derrotas=derrotasD
         }
         resultados.text = "Victorias Totales: $victorias\nDerrotas Totales: $derrotas"
 
@@ -91,7 +127,11 @@ class Final : AppCompatActivity() {
         }
     }
     fun reiniciar(view: View) {
-        var intent=Intent(this,Juego::class.java)
+        if (modo.equals("normal")) {
+            intent = Intent(this, Juego::class.java)
+        }else{
+            intent = Intent(this, Juego2::class.java)
+        }
         mediaPlayer?.stop()
         animacion(view,200,200)
         view.postDelayed({startActivity(intent)},400)

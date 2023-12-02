@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         mediaPlayer = MediaPlayer.create(this, R.raw.inicio)
         mediaPlayer?.setVolume(0.3F, 0.3F)
         mediaPlayer?.start()
+        mediaPlayer?.isLooping=true
         if (!musica) {
             mediaPlayer?.pause()
             var switch=findViewById<Switch>(R.id.switch1)
@@ -86,5 +87,17 @@ class MainActivity : AppCompatActivity() {
             putBoolean("musica", musica)
             apply()
         }
+    }
+
+    fun jugar2(view: View) {
+        val intent = Intent(this, Juego2::class.java)
+        intent.putExtra("musica", musica)
+        mediaPlayer?.stop()
+        mediaPlayer = MediaPlayer.create(this, R.raw.boton)
+        mediaPlayer?.seekTo(900)
+        mediaPlayer?.start()
+        mediaPlayer?.setVolume(1.0F, 1.0F)
+        animacion(view, 200, 200)
+        view.postDelayed({ startActivity(intent) }, 400)
     }
 }

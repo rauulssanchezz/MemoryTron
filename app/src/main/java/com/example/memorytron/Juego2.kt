@@ -1,42 +1,41 @@
 package com.example.memorytron
-import android.animation.ObjectAnimator
-import android.animation.Animator
+
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.media.MediaPlayer
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.preference.PreferenceManager
 import android.view.View
 import android.widget.ImageView
-import androidx.appcompat.app.AppCompatActivity
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Semaphore
 
-class Juego : AppCompatActivity() {
+class Juego2 : AppCompatActivity() {
     var musica = true
     lateinit var imgs: MutableList<Int>
     var ultimg: ImageView? = null
     var primerclick = false
     lateinit var imageViews: MutableList<ImageView>
-    var pulsado: MutableList<Boolean> = MutableList(12) { false }
+    var pulsado: MutableList<Boolean> = MutableList(18) { false }
     var posant: Int? = null
     var cont = 0
     var semaforo = Semaphore(1)
     var gana = 0
-    var vidas = 5
+    var vidas = 6
     var mediaPlayer: MediaPlayer? = null
     lateinit var sharedPreferences: SharedPreferences
-    lateinit var  handler :Handler
+    lateinit var  handler : Handler
 
     // Utiliza CountDownLatch para la sincronización
     private val latch = CountDownLatch(1)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_juego)
+        setContentView(R.layout.activity_juego2)
 
         handler= Handler(Looper.getMainLooper())
 
@@ -47,12 +46,16 @@ class Juego : AppCompatActivity() {
             R.drawable.gato,
             R.drawable.doberman,
             R.drawable.cerdo,
+            R.drawable.aguila,
+            R.drawable.caballero,
             R.drawable.pinguino,
             R.drawable.mono,
             R.drawable.medusa,
             R.drawable.gato,
             R.drawable.doberman,
-            R.drawable.cerdo
+            R.drawable.cerdo,
+            R.drawable.aguila,
+            R.drawable.caballero
         )
         imgs.shuffle()
         imageViews = mutableListOf(
@@ -67,12 +70,16 @@ class Juego : AppCompatActivity() {
             findViewById<ImageView>(R.id.ct3img1),
             findViewById<ImageView>(R.id.ct3img2),
             findViewById<ImageView>(R.id.ct3img3),
-            findViewById<ImageView>(R.id.ct3img4)
+            findViewById<ImageView>(R.id.ct3img4),
+            findViewById<ImageView>(R.id.ct4img1),
+            findViewById<ImageView>(R.id.ct4img2),
+            findViewById<ImageView>(R.id.ct4img3),
+            findViewById<ImageView>(R.id.ct4img4)
         )
 
         sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this)
         musica=sharedPreferences.getBoolean("musica",true)
-        mediaPlayer = MediaPlayer.create(this, R.raw.juego)
+        mediaPlayer = MediaPlayer.create(this, R.raw.juego2)
         mediaPlayer?.setVolume(0.5F, 0.5F)
         mediaPlayer?.start()
         mediaPlayer?.isLooping=true
@@ -139,7 +146,7 @@ class Juego : AppCompatActivity() {
             ultimg = null
             cont = 0
             gana++
-            if (gana == 6) {
+            if (gana == 8) {
                 Thread.sleep(250)
                 var resultado = "Eres Admin"
                 newActivity(resultado)
@@ -156,7 +163,11 @@ class Juego : AppCompatActivity() {
             posant = null
             cont = 0
             vidas--
-            if (vidas==4){
+            if (vidas == 5) {
+                var imagen = findViewById<ImageView>(R.id.vida6)
+                animacion(imagen,50,150)
+                imagen.setImageResource(R.drawable.roto)
+            } else if (vidas==4){
                 var imagen = findViewById<ImageView>(R.id.vida5)
                 animacion(imagen,50,150)
                 imagen.setImageResource(R.drawable.roto)
@@ -235,12 +246,28 @@ class Juego : AppCompatActivity() {
                 var pos = 11
                 accion(pos, view)
             }
+            R.id.ct4img1 -> {
+                var pos = 12
+                accion(pos, view)
+            }
+            R.id.ct4img2 -> {
+                var pos = 13
+                accion(pos, view)
+            }
+            R.id.ct4img3 -> {
+                var pos = 14
+                accion(pos, view)
+            }
+            R.id.ct4img4 -> {
+                var pos = 15
+                accion(pos, view)
+            }
         }
     }
 
 
     //La animacion no se que mas quieres si se llama asi la funcion
-    fun animacion(view:View,tiempoX:Long,tiempoY:Long){
+    fun animacion(view: View, tiempoX:Long, tiempoY:Long){
         view.animate().apply {
             scaleX(0.9f)
             scaleY(0.9f)
@@ -277,20 +304,20 @@ class Juego : AppCompatActivity() {
         var intent = Intent(this, Final::class.java)
         intent.putExtra("resultado", res)
         intent.putExtra("musica", musica)
-        intent.putExtra("modo","normal")
+        intent.putExtra("modo","dificil")
         mediaPlayer?.stop()
         startActivity(intent)
     }
 
     override fun onBackPressed() {
         mediaPlayer?.stop()
-        var intent=Intent(this,MainActivity::class.java)
+        var intent= Intent(this,MainActivity::class.java)
         startActivity(intent)
         super.onBackPressed()
     }
 
     fun reiniciar(view: View) {
-        var intent=Intent(this,Juego::class.java)
+        var intent= Intent(this,Juego2::class.java)
         mediaPlayer?.stop()
         animacion(view,200,200)
         view.postDelayed({startActivity(intent)},400)
@@ -305,10 +332,3 @@ class Juego : AppCompatActivity() {
         super.onResume()
     }
 }
-
-
-
-
-
-
-
