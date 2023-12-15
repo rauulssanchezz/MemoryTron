@@ -1,6 +1,5 @@
 package com.example.memorytron
-import android.animation.Animator
-import android.animation.ObjectAnimator
+
 import android.content.Intent
 import android.content.SharedPreferences
 import android.media.MediaPlayer
@@ -9,12 +8,11 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.view.View
 import android.widget.ImageView
-import android.widget.Switch
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.edit
 
-class Final : AppCompatActivity() {
+
+class End : AppCompatActivity() {
 
     var mediaPlayer: MediaPlayer? = null
     var musica = true
@@ -108,7 +106,7 @@ class Final : AppCompatActivity() {
     }
     override fun onBackPressed() {
         mediaPlayer?.stop()
-        var intent=Intent(this,MainActivity::class.java)
+        var intent=Intent(this,Start::class.java)
         startActivity(intent)
         super.onBackPressed()
     }
@@ -128,9 +126,9 @@ class Final : AppCompatActivity() {
     }
     fun reiniciar(view: View) {
         if (modo.equals("normal")) {
-            intent = Intent(this, Juego::class.java)
+            intent = Intent(this, GameNormal::class.java)
         }else{
-            intent = Intent(this, Juego2::class.java)
+            intent = Intent(this, GameHard::class.java)
         }
         mediaPlayer?.stop()
         animacion(view,200,200)

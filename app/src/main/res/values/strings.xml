@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">MemoryTron</string>
+    <string name="reiniciar">REINICIAR</string>
+    <string name="normal">NORMAL</string>
+    <string name="dificil">DIFICIL</string>
+    <string name="m_sica">Música</string>
     <integer name="victoriasN">0</integer>
     <integer name="derrotasN">0</integer>
     <integer name="victoriasD">0</integer>

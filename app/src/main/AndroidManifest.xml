@@ -13,16 +13,16 @@
         android:theme="@style/Theme.MemoryTron"
         tools:targetApi="31">
         <activity
-            android:name=".Juego2"
+            android:name=".GameHard"
             android:exported="false" />
         <activity
-            android:name=".Final"
+            android:name=".End"
             android:exported="false" />
         <activity
-            android:name=".Juego"
+            android:name=".GameNormal"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Start"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

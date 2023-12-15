@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".Start"
     android:background="@drawable/castillo">
 
 
@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/jugar2"
-        android:text="NORMAL"
+        android:text="@string/normal"
         android:textColor="@color/white"
         android:textSize="17sp"
         android:onClick="jugar"
@@ -31,7 +31,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="  DIFICIL  "
+        android:text="@string/dificil"
         android:textColor="@color/white"
         android:textSize="17sp"
         android:onClick="jugar2"
@@ -43,7 +43,7 @@
         android:id="@+id/switch1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Música"
+        android:text="@string/m_sica"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:onClick="pararMusica"/>

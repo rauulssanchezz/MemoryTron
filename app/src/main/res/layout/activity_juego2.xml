@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Juego2"
+    tools:context=".GameHard"
     android:background="@drawable/mar">
     <LinearLayout
         android:id="@+id/vidas"
@@ -409,7 +409,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/mar"
-        android:text="REINICIAR"
+        android:text="@string/reiniciar"
         android:textColor="@color/white"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
